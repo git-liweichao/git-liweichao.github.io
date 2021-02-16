@@ -29,19 +29,19 @@ const ap = new APlayer({
       },
       {
         name: '如果当时',
-        artis: '许嵩',
+        artist: '许嵩',
         url: 'http://music.163.com/song/media/outer/url?id=167870.mp3',
         cover: 'http://p3.music.126.net/Md3RLH0fe2a_3dMDnfqoQg==/18590542604286213.jpg',
       },
       {
         name: 'Someone Like You',
-        artis: 'Adele',
+        artist: 'Adele',
         url: 'http://music.163.com/song/media/outer/url?id=16435049.mp3',
         cover: 'http://p4.music.126.net/l-lffSJW45DaETAp7Vi22Q==/109951165341361103.jpg',
       },
       {
         name: 'My Heart Will Go On',
-        artis: 'Celine Dion',
+        artist: 'Celine Dion',
         url: 'http://music.163.com/song/media/outer/url?id=2308499.mp3',
         cover: 'http://p4.music.126.net/mO1OUNjZtCEIvAGdr7YXaA==/813638604607979.jpg',
       }      
