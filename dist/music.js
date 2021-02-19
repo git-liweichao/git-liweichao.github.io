@@ -52,7 +52,7 @@ const ap = new APlayer({
         cover: 'https://p2.music.126.net/aiPQXP8mdLovQSrKsM3hMQ==/1416170985079958.jpg',
       },
       {
-        name: '人生如期',
+        name: '人生如棋',
         artist: '钟菌波',
         url: 'http://music.163.com/song/media/outer/url?id=31645206.mp3',
         cover: 'https://p1.music.126.net/22AFRy2wqgaBDeqmJ-rFiQ==/109951163926961482.jpg',
