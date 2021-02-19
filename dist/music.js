@@ -28,10 +28,46 @@ const ap = new APlayer({
         cover: 'http://p4.music.126.net/4tTN8CnR7wG4E1cauIPCvQ==/109951163240682406.jpg',
       },
       {
+        name: '仙剑三歌曲',
+        artist: '若干歌手',
+        url: 'https://sharefs.yun.kugou.com/202102191751/c130fafe54993a25631e91e890fae500/G054/M03/00/09/dg0DAFaKpXuAYQ4kAKaDHDJSdtc580.mp3',
+        cover: 'https://p2.music.126.net/UyDVlWWgOn8p8U8uQ_I1xQ==/7934075907687518.jpg',
+      },
+      {
         name: '如果当时',
         artist: '许嵩',
         url: 'http://music.163.com/song/media/outer/url?id=167870.mp3',
         cover: 'http://p3.music.126.net/Md3RLH0fe2a_3dMDnfqoQg==/18590542604286213.jpg',
+      },
+      {
+        name: '有多少爱可以重来(live)',
+        artist: '迪克牛仔',
+        url: 'http://music.163.com/song/media/outer/url?id=77028.mp3',
+        cover: 'https://p1.music.126.net/l7OoeTaz636FaJFNmmqqEA==/107752139527296.jpg',
+      },
+      {
+        name: '大鱼',
+        artist: '周深',
+        url: 'http://music.163.com/song/media/outer/url?id=413812448.mp3',
+        cover: 'https://p2.music.126.net/aiPQXP8mdLovQSrKsM3hMQ==/1416170985079958.jpg',
+      },
+      {
+        name: '人生如期',
+        artist: '钟菌波',
+        url: 'http://music.163.com/song/media/outer/url?id=31645206.mp3',
+        cover: 'https://p1.music.126.net/22AFRy2wqgaBDeqmJ-rFiQ==/109951163926961482.jpg',
+      },
+      {
+        name: 'Butter-Fly',
+        artist: '和田光司',
+        url: 'http://music.163.com/song/media/outer/url?id=4940920.mp3',
+        cover: 'https://p1.music.126.net/jWV56lNZod308s8sGNAItA==/109951163297574192.jpg',
+      },
+      {
+        name: 'XY&Z',
+        artist: '松本梨香',
+        url: 'http://music.163.com/song/media/outer/url?id=41643682.mp3',
+        cover: 'https://p1.music.126.net/R2zhPE4JgN14XH26jmtpHw==/3273246124629175.jpg',
       },
       {
         name: 'Someone Like You',
