@@ -60,7 +60,7 @@ const ap = new APlayer({
       {
         name: 'Butter-Fly',
         artist: '和田光司',
-        url: 'https://onedrive.gimhoy.com/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3UvcyFBc3RPV0RaY2tQSWFtME1mMVUxRUtEb2VzWHFvP2U9d3lwMGJw.mp3',
+        url: 'https://onedrive.gimhoy.com/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3UvcyFBc3RPV0RaY2tQSWFtMFlTZkQ2UTBvdXp0YkxXP2U9QjRxZVNN.mp3',
         cover: 'https://p1.music.126.net/jWV56lNZod308s8sGNAItA==/109951163297574192.jpg',
       },
       {
