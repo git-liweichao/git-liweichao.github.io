@@ -28,6 +28,36 @@ const ap = new APlayer({
         cover: 'http://p4.music.126.net/4tTN8CnR7wG4E1cauIPCvQ==/109951163240682406.jpg',
       },
       {
+        name: '如果我们不曾相遇',
+        artist: '五月天',
+        url: 'https://onedrive.gimhoy.com/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3UvcyFBc3RPV0RaY2tQSWFtMHAxdlNKS2hyQTJ3dFhVP2U9SHZISTNh.mp3',
+        cover: 'http://cdnmusic.migu.cn/picture/2020/1127/0409/AS05afa3ef1ed4b6873d22bf7f96c89a3f.jpg',
+      },
+      {
+        name: '顽固',
+        artist: '五月天',
+        url: 'https://onedrive.gimhoy.com/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3UvcyFBc3RPV0RaY2tQSWFtMHRnOUZ2QnY3Vi1CaXB3P2U9YTR4V3pP.mp3',
+        cover: 'http://cdnmusic.migu.cn/picture/2019/0513/1349/AS1610080912178824.jpg',
+      },
+      {
+        name: '温柔20th',
+        artist: '五月天',
+        url: 'https://onedrive.gimhoy.com/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3UvcyFBc3RPV0RaY2tQSWFtMDA4MFd5amR3cHl0N2VvP2U9b0xiRm10.mp3',
+        cover: 'http://cdnmusic.migu.cn/picture/2020/0103/1023/AScafa0f37681f477299507737accd1b86.jpg',
+      },
+      {
+        name: '情歌',
+        artist: '梁静茹',
+        url: 'https://onedrive.gimhoy.com/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3UvcyFBc3RPV0RaY2tQSWFtMGxJdmEyc0lBcUxVa25XP2U9c056bW5N.mp3',
+        cover: 'http://cdnmusic.migu.cn/picture/2020/0902/0300/AS8d38ba1f29636cc0bb53903641e6420a.jpg',
+      },
+      {
+        name: '宁夏',
+        artist: '梁静茹',
+        url: 'https://onedrive.gimhoy.com/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3UvcyFBc3RPV0RaY2tQSWFtMHgyajN1RVAzc29pYWdSP2U9RWdvUmV0.mp3',
+        cover: 'http://cdnmusic.migu.cn/picture/2020/1124/1800/ASa81c0afd39d869255879e9051c98fb2b.jpg',
+      },
+      {
         name: '如果当时',
         artist: '许嵩',
         url: 'http://music.163.com/song/media/outer/url?id=167870.mp3',
@@ -75,6 +105,18 @@ const ap = new APlayer({
         url: 'http://music.163.com/song/media/outer/url?id=41643682.mp3',
         cover: 'https://p1.music.126.net/R2zhPE4JgN14XH26jmtpHw==/3273246124629175.jpg',
       },
+      {
+        name: 'めざせポケモンマスタ-20th Anniversary Ballad ver.-',
+        artist: '松本梨香',
+        url: 'http://music.163.com/song/media/outer/url?id=521493117.mp3',
+        cover: 'https://p1.music.126.net/_sllrC16IS8z8txtBaA2dw==/109951163073303849.jpg',
+      }, 
+      {
+        name: '小小的手心',
+        artist: 'Key Sounds Label',
+        url: 'https://onedrive.gimhoy.com/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3UvcyFBc3RPV0RaY2tQSWFtMDRJNEpaZWtaeWZ3RFhQP2U9Y0l4aEo3.mp3',
+        cover: 'https://imgessl.kugou.com/stdmusic/20200909/20200909134317111123.jpg',
+      },      
       {
         name: 'Someone Like You',
         artist: 'Adele',
