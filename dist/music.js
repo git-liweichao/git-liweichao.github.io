@@ -28,12 +28,6 @@ const ap = new APlayer({
         cover: 'http://p4.music.126.net/4tTN8CnR7wG4E1cauIPCvQ==/109951163240682406.jpg',
       },
       {
-        name: '仙剑三歌曲',
-        artist: '若干歌手',
-        url: 'https://sharefs.yun.kugou.com/202102191751/c130fafe54993a25631e91e890fae500/G054/M03/00/09/dg0DAFaKpXuAYQ4kAKaDHDJSdtc580.mp3',
-        cover: 'https://p2.music.126.net/UyDVlWWgOn8p8U8uQ_I1xQ==/7934075907687518.jpg',
-      },
-      {
         name: '如果当时',
         artist: '许嵩',
         url: 'http://music.163.com/song/media/outer/url?id=167870.mp3',
@@ -52,6 +46,12 @@ const ap = new APlayer({
         cover: 'https://p2.music.126.net/aiPQXP8mdLovQSrKsM3hMQ==/1416170985079958.jpg',
       },
       {
+        name: '我们的冒险',
+        artist: '曹寅',
+        url: 'https://onedrive.gimhoy.com/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3UvcyFBc3RPV0RaY2tQSWFtMFRnMWdNVERid3g2Z0dmP2U9YUtCcjd5.mp3',
+        cover: 'https://imgessl.kugou.com/stdmusic/20201029/20201029170806485912.jpg',
+      },
+      {
         name: '人生如棋',
         artist: '钟菌波',
         url: 'http://music.163.com/song/media/outer/url?id=31645206.mp3',
@@ -62,6 +62,12 @@ const ap = new APlayer({
         artist: '和田光司',
         url: 'https://onedrive.gimhoy.com/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3UvcyFBc3RPV0RaY2tQSWFtME1mMVUxRUtEb2VzWHFvP2U9d3lwMGJw.mp3',
         cover: 'https://p1.music.126.net/jWV56lNZod308s8sGNAItA==/109951163297574192.jpg',
+      },
+      {
+        name: '虹',
+        artist: '菅田将暉(すだ まさき)',
+        url: 'https://onedrive.gimhoy.com/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3UvcyFBc3RPV0RaY2tQSWFtMFdfdGFZaEFzU2pyTHNBP2U9S1BBVUJQ.mp3',
+        cover: 'https://imgessl.kugou.com/stdmusic/20201026/20201026154108837966.jpg',
       },
       {
         name: 'XY&Z',
