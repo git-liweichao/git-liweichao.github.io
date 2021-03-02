@@ -168,6 +168,83 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://git-liweichao.github.io/2021/03/02/Cmake%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/clannad.jpg">
+      <meta itemprop="name" content="liweichao">
+      <meta itemprop="description" content="If you are not as smart as others, as others good conditions, please put more time! more energy! more sweat!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MyShare">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/02/Cmake%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/" class="post-title-link" itemprop="url">Cmake相关问题记录</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2021-03-02 15:41:17 / 修改时间：08:11:55" itemprop="dateCreated datePublished" datetime="2021-03-02T15:41:17Z">2021-03-02</time>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="Cmake是什么？"><a href="#Cmake是什么？" class="headerlink" title="Cmake是什么？"></a>Cmake是什么？</h3><p>​    首先，C语言如果要生成可执行程序，就需要经过“编译”的这个阶段，不管是什么VisualStudio和CodeBlocks这样子的IDE，在执行绿色三角形的过程中，不管有多少个源文件，IDE自动帮你弄好，只需要执行相应的程序就可以了。</p>
+<p>​    但是，如果是手动执行这个过程的话，最少需要经过“编译”和“链接”这两个过程。“编译”就是处理你的源代码，将其变成一堆二进制文件，“链接”就是可以理解为如果程序中包含多个源代码文件，就要把这些文件的编译结果“组合”起来。</p>
+<p>​    当前，编译器一般一条编译命令也就处理有限的几个文件，如果项目变大了，几千个或者几百个文件，在命令行手写编译命令这就不合适了。因此，弄一个配置文件，描述了编译的操作以及一些参数设置就是很有必要的了，所以makefile就是干这个的。写好makefile，然后永一个叫make的程序，去读这个配置参数，然后进行自动化构建。</p>
+<p>​    但是编译这个操作，一般又和操作系统强相关，你在Linux下编译的操作在Windows下就不一定能用了，所以一般要针对不同平台写不同的makefile。这种麻烦的事情肯定会招人烦，对于跨平台的程序，写一次然后到处运行才是目标，所以Cmake就是这样子。</p>
+<p>​    Cmake是跨平台和IDE的一种工具。它定义了一套语言，配套了相应的手册，使用它的语法写一套通用的编译配置的信息（称作CmakeList.txt），然后它会帮你生成各个平台的makefile，然后子就不用写不同的makefile来适应不同的环境了。</p>
+<p>​    总的一句话：</p>
+<p>​                <strong>CMake是一个构建工具，目标是生成Make-File；Make-File用于指导编译器进行编译</strong></p>
+<h4 id="举个例子"><a href="#举个例子" class="headerlink" title="举个例子"></a>举个例子</h4>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/03/02/Cmake%E7%9B%B8%E5%85%B3%E9%97%AE%E9%A2%98%E8%AE%B0%E5%BD%95/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://git-liweichao.github.io/2021/02/21/%E4%BD%BF%E7%94%A8OneDrive%E7%94%9F%E6%88%90%E9%9F%B3%E4%B9%90%E5%A4%96%E9%93%BE/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -618,7 +695,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-count">6</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
