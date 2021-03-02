@@ -64,6 +64,12 @@ const ap = new APlayer({
         cover: 'http://p3.music.126.net/Md3RLH0fe2a_3dMDnfqoQg==/18590542604286213.jpg',
       },
       {
+        name: '世界末日(live)',
+        artist: '周杰伦',
+        url: 'https://onedrive.gimhoy.com/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3UvcyFBc3RPV0RaY2tQSWFtMUlpdDBxbjlyMTNzNWV4P2U9RzJIMUNL.mp3',
+        cover: 'https://imgessl.kugou.com/stdmusic/20150720/20150720175413227058.jpg'
+      },
+      {
         name: '有多少爱可以重来(live)',
         artist: '迪克牛仔',
         url: 'http://music.163.com/song/media/outer/url?id=77028.mp3',
@@ -92,6 +98,12 @@ const ap = new APlayer({
         artist: '和田光司',
         url: 'https://onedrive.gimhoy.com/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3UvcyFBc3RPV0RaY2tQSWFtMFlTZkQ2UTBvdXp0YkxXP2U9QjRxZVNN.mp3',
         cover: 'https://p1.music.126.net/jWV56lNZod308s8sGNAItA==/109951163297574192.jpg',
+      },
+      {
+        name: '',
+        artist: '宮崎歩',
+        url: 'http://music.163.com/song/media/outer/url?id=4940928.mp3',
+        cover: 'http://p2.music.126.net/o8ZfncjFF5frq8Q8iJJ9QQ==/2321069046256264.jpg'
       },
       {
         name: '虹',
