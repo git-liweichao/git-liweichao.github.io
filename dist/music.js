@@ -30,31 +30,31 @@ const ap = new APlayer({
       {
         name: '如果我们不曾相遇',
         artist: '五月天',
-        url: 'https://onedrive.gimhoy.com/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3UvcyFBc3RPV0RaY2tQSWFtMHAxdlNKS2hyQTJ3dFhVP2U9SHZISTNh.mp3',
+        url: 'https://storage.live.com/items/1AF2905C36584ECB!3530?authkey=!AHW9IkqGsDbC1dQ',
         cover: 'http://cdnmusic.migu.cn/picture/2020/1127/0409/AS05afa3ef1ed4b6873d22bf7f96c89a3f.jpg',
       },
       {
         name: '顽固',
         artist: '五月天',
-        url: 'https://onedrive.gimhoy.com/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3UvcyFBc3RPV0RaY2tQSWFtMHRnOUZ2QnY3Vi1CaXB3P2U9YTR4V3pP.mp3',
+        url: 'https://storage.live.com/items/1AF2905C36584ECB!3531?authkey=!AGD0W8G_tX4GKnA',
         cover: 'http://cdnmusic.migu.cn/picture/2019/0513/1349/AS1610080912178824.jpg',
       },
       {
         name: '温柔20th',
         artist: '五月天',
-        url: 'https://onedrive.gimhoy.com/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3UvcyFBc3RPV0RaY2tQSWFtMDA4MFd5amR3cHl0N2VvP2U9b0xiRm10.mp3',
+        url: 'https://storage.live.com/items/1AF2905C36584ECB!3533?authkey=!ADzRbKN3CnK3t6g',
         cover: 'http://cdnmusic.migu.cn/picture/2020/0103/1023/AScafa0f37681f477299507737accd1b86.jpg',
       },
       {
         name: '情歌',
         artist: '梁静茹',
-        url: 'https://onedrive.gimhoy.com/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3UvcyFBc3RPV0RaY2tQSWFtMGxJdmEyc0lBcUxVa25XP2U9c056bW5N.mp3',
+        url: 'https://storage.live.com/items/1AF2905C36584ECB!3529?authkey=!AEi9rawgCotSSdY',
         cover: 'http://cdnmusic.migu.cn/picture/2020/0902/0300/AS8d38ba1f29636cc0bb53903641e6420a.jpg',
       },
       {
         name: '宁夏',
         artist: '梁静茹',
-        url: 'https://onedrive.gimhoy.com/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3UvcyFBc3RPV0RaY2tQSWFtMHgyajN1RVAzc29pYWdSP2U9RWdvUmV0.mp3',
+        url: 'https://storage.live.com/items/1AF2905C36584ECB!3532?authkey=!AHaPe4Q_eyiJqBE',
         cover: 'http://cdnmusic.migu.cn/picture/2020/1124/1800/ASa81c0afd39d869255879e9051c98fb2b.jpg',
       },
       {
@@ -66,7 +66,7 @@ const ap = new APlayer({
       {
         name: '世界末日(live)',
         artist: '周杰伦',
-        url: 'https://onedrive.gimhoy.com/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3UvcyFBc3RPV0RaY2tQSWFtMUlpdDBxbjlyMTNzNWV4P2U9RzJIMUNL.mp3',
+        url: 'https://storage.live.com/items/1AF2905C36584ECB!3538?authkey=!ACK3Sqf2vXezl7E',
         cover: 'https://imgessl.kugou.com/stdmusic/20150720/20150720175413227058.jpg'
       },
       {
@@ -84,7 +84,7 @@ const ap = new APlayer({
       {
         name: '我们的冒险',
         artist: '曹寅',
-        url: 'https://onedrive.gimhoy.com/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3UvcyFBc3RPV0RaY2tQSWFtMFRnMWdNVERid3g2Z0dmP2U9YUtCcjd5.mp3',
+        url: 'https://storage.live.com/items/1AF2905C36584ECB!3524?authkey=!AODWAxMNvDHqAZ8',
         cover: 'https://imgessl.kugou.com/stdmusic/20201029/20201029170806485912.jpg',
       },
       {
@@ -96,11 +96,11 @@ const ap = new APlayer({
       {
         name: 'Butter-Fly',
         artist: '和田光司',
-        url: 'https://onedrive.gimhoy.com/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3UvcyFBc3RPV0RaY2tQSWFtMFlTZkQ2UTBvdXp0YkxXP2U9QjRxZVNN.mp3',
+        url: 'https://storage.live.com/items/1AF2905C36584ECB!3526?authkey=!ABJ8PpDSi7O1stY',
         cover: 'https://p1.music.126.net/jWV56lNZod308s8sGNAItA==/109951163297574192.jpg',
       },
       {
-        name: '',
+        name: 'break up',
         artist: '宮崎歩',
         url: 'http://music.163.com/song/media/outer/url?id=4940928.mp3',
         cover: 'http://p2.music.126.net/o8ZfncjFF5frq8Q8iJJ9QQ==/2321069046256264.jpg'
@@ -108,7 +108,7 @@ const ap = new APlayer({
       {
         name: '虹',
         artist: '菅田将暉(すだ まさき)',
-        url: 'https://onedrive.gimhoy.com/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3UvcyFBc3RPV0RaY2tQSWFtMFdfdGFZaEFzU2pyTHNBP2U9S1BBVUJQ.mp3',
+        url: 'https://storage.live.com/items/1AF2905C36584ECB!3525?authkey=!AL-1piECxKOsuwA',
         cover: 'https://imgessl.kugou.com/stdmusic/20201026/20201026154108837966.jpg',
       },
       {
@@ -126,7 +126,7 @@ const ap = new APlayer({
       {
         name: '小小的手心',
         artist: 'Key Sounds Label',
-        url: 'https://onedrive.gimhoy.com/1drv/aHR0cHM6Ly8xZHJ2Lm1zL3UvcyFBc3RPV0RaY2tQSWFtMDRJNEpaZWtaeWZ3RFhQP2U9Y0l4aEo3.mp3',
+        url: 'https://storage.live.com/items/1AF2905C36584ECB!3534?authkey=!AAjgll6RnJ_ANc8',
         cover: 'https://imgessl.kugou.com/stdmusic/20200909/20200909134317111123.jpg',
       },      
       {
