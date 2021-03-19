@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/change_32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/change_16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"git-liweichao.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="第一讲 操作系统概述操作系统对硬件进行一层隔离。 操作系统内核特征：并发、共享、虚拟、异步； 操作系统结构加电之后去读BIOS，BIOS去读对应的加载程序，加载程序去读对应的内核映像。 系统调用: INT和IRET指令用于系统调用：系统调用时，堆栈切换和特权级的转换。 函数调用：CALL和RET用于常规调用：常规调用时，没有堆栈切换 文件句柄：1.只有windows中才有句柄，windows中的句">
+<meta property="og:type" content="article">
+<meta property="og:title" content="操作系统学习记录">
+<meta property="og:url" content="http://git-liweichao.github.io/2021/03/09/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/index.html">
+<meta property="og:site_name" content="MyShare">
+<meta property="og:description" content="第一讲 操作系统概述操作系统对硬件进行一层隔离。 操作系统内核特征：并发、共享、虚拟、异步； 操作系统结构加电之后去读BIOS，BIOS去读对应的加载程序，加载程序去读对应的内核映像。 系统调用: INT和IRET指令用于系统调用：系统调用时，堆栈切换和特权级的转换。 函数调用：CALL和RET用于常规调用：常规调用时，没有堆栈切换 文件句柄：1.只有windows中才有句柄，windows中的句">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-09T15:07:53.000Z">
+<meta property="article:modified_time" content="2021-03-16T01:52:08.488Z">
+<meta property="article:author" content="liweichao">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://git-liweichao.github.io/2021/03/09/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>操作系统学习记录 | MyShare</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MyShare</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Notes</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-playlist">
+
+    <a href="/playlist/" rel="section"><i class="music fa-fw"></i>playlist</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://git-liweichao.github.io/2021/03/09/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/clannad.jpg">
+      <meta itemprop="name" content="liweichao">
+      <meta itemprop="description" content="If you are not as smart as others, as others good conditions, please put more time! more energy! more sweat!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MyShare">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          操作系统学习记录
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-09 15:07:53" itemprop="dateCreated datePublished" datetime="2021-03-09T15:07:53Z">2021-03-09</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-03-16 01:52:08" itemprop="dateModified" datetime="2021-03-16T01:52:08Z">2021-03-16</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h2 id="第一讲-操作系统概述"><a href="#第一讲-操作系统概述" class="headerlink" title="第一讲 操作系统概述"></a>第一讲 操作系统概述</h2><p>操作系统对硬件进行一层隔离。</p>
+<p>操作系统内核特征：并发、共享、虚拟、异步；</p>
+<h3 id="操作系统结构"><a href="#操作系统结构" class="headerlink" title="操作系统结构"></a>操作系统结构</h3><p>加电之后去读BIOS，BIOS去读对应的加载程序，加载程序去读对应的内核映像。</p>
+<p>系统调用: INT和IRET指令用于系统调用：系统调用时，堆栈切换和特权级的转换。</p>
+<p>函数调用：CALL和RET用于常规调用：常规调用时，没有堆栈切换</p>
+<h5 id="文件句柄："><a href="#文件句柄：" class="headerlink" title="文件句柄："></a>文件句柄：</h5><p>1.只有windows中才有句柄，windows中的句柄是指针的指针，因为windows中对象的经常会在内存中移动（如进行垃圾回收后），所以地址值经常会变，所以就对外提供一个指针的指针即句柄给用户，句柄的地址是不会变的。</p>
+<p>2.linux中是没有文件句柄的，只有文件描述符，只是大家习惯把它说成句柄。</p>
+<p>3。linux中， 每当进程打开一个文件时，系统就为其分配一个唯一对应的整型文件描述符（从0开始），用来标识这个文件。linux 操作系统通常对每个进程能打开的文件数量有一个限制。默认是1024。</p>
+<h3 id="实模式和保护模式"><a href="#实模式和保护模式" class="headerlink" title="实模式和保护模式"></a>实模式和保护模式</h3><ul>
+<li>首先在CPU加电之后，CPU里面的ROM存储器会将其里面保存的初始值传给各个寄存器，其中CS:IP=0xf000:ffff0(CS: 代码寄存器；IP：指令寄存器)，这个值决定了我们从内存中读数据的位置，PC=16*CS +IP。</li>
+<li>此时系统处于实模式，此时的地址总线只有20位，所以地址空间的总大小只有1M，BIOS启动固件就在这个IM的空间里面。</li>
+<li>BIOS启动固件提供的一些功能：<ul>
+<li>基本输入输出的程序</li>
+<li>系统设置信息</li>
+<li>开机后自检程序</li>
+<li>系统自启动程序</li>
+</ul>
+</li>
+</ul>
+<h3 id="内联汇编"><a href="#内联汇编" class="headerlink" title="内联汇编"></a>内联汇编</h3><p>基本格式</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> a = <span class="number">1</span>, b = <span class="number">2</span>, c = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">asm</span>(</span><br><span class="line">    	<span class="string">&quot;addl %2 %0&quot;</span> </span><br><span class="line">        : <span class="string">&quot;=g&quot;</span>(c)</span><br><span class="line">        : <span class="string">&quot;0&quot;</span>(a), <span class="string">&quot;g&quot;</span>(b)</span><br><span class="line">        : <span class="string">&quot;memory&quot;</span></span><br><span class="line">    );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在内联汇编中：</p>
+<ol>
+<li><p>第一行是汇编语句，用双引号引起来，<strong>多条语句使用;或者\n\t来分隔</strong>。</p>
+</li>
+<li><p>第二行是输出操作数，都是“=？”（var）的形式，var可以是任意内存变量（输出结果会存到这个变量中），？一般是下面这些标识符（表示内联汇编中用什么来代理这个操作数）：</p>
+<ol>
+<li>a,b,c,d,S,D分别代表eax,ebx,ecx,edx,esi,edi寄存器</li>
+<li>r表示上面的任意寄存器的一个（谁空闲就使用谁）</li>
+<li>m 内存</li>
+<li>i 立即数（常量，只用于输入操作数）</li>
+<li>g 寄存器、内存、立即数都行</li>
+</ol>
+<p><strong>在汇编中使用%序号来表示这些输入/输出操作数，序号从0开始。为了与操作数区分开来，寄存器用两个%引出，如：%%eax</strong></p>
+</li>
+<li><p>第三行是输入操作数，都是”?“(var)的形式，<strong>？除了可以是上面的那些标识符，还可以是出输出操作数的序号，表示用var来初始化该输出操作数</strong>，上面程序中%0和%1就是一个东西，初始化为1(a的值)。</p>
+</li>
+</ol>
+<h2 id="实验Lab1"><a href="#实验Lab1" class="headerlink" title="实验Lab1"></a>实验Lab1</h2><p>ld (链接)，带有的参数的含义如下：</p>
+<ul>
+<li><p>-m:模拟对应的链接器（此处为i386）</p>
+</li>
+<li><p>-T：显式地向链接器提供命令文件（也叫连接器脚本）</p>
+</li>
+</ul>
+<h3 id="问题2-一个被系统认为是符合规范的硬盘主引导扇区的特征是什么？"><a href="#问题2-一个被系统认为是符合规范的硬盘主引导扇区的特征是什么？" class="headerlink" title="问题2 一个被系统认为是符合规范的硬盘主引导扇区的特征是什么？"></a>问题2 一个被系统认为是符合规范的硬盘主引导扇区的特征是什么？</h3><ul>
+<li>符合规范有两个条件</li>
+</ul>
+<ol>
+<li>主引导扇区应有512Byte</li>
+<li>第510，511个字节对应的分别为0x55,0xAA;</li>
+</ol>
+<h4 id="GDT表"><a href="#GDT表" class="headerlink" title="GDT表"></a>GDT表</h4><p>GDT表的全称是Global Descriptor Table, 中文称作”全局描述符表“。是存在于保护模式下的，GDT表里的每一项被叫做<strong>”段描述符“</strong>，用来记录每个内存分段的一些属性信息，每个”段描述符“占8字节。</p>
+<h3 id="第六讲-物理内存管理：非连续内存分配"><a href="#第六讲-物理内存管理：非连续内存分配" class="headerlink" title="第六讲 物理内存管理：非连续内存分配"></a>第六讲 物理内存管理：非连续内存分配</h3><ul>
+<li>非连续内存分配时，根据采用的每个基本块的大小不同，可以分为段式和页式，段式分的块比较大，页式分的块比较小。</li>
+</ul>
+<h3 id="第七讲-实验二-物理内存管理"><a href="#第七讲-实验二-物理内存管理" class="headerlink" title="第七讲 实验二 物理内存管理"></a>第七讲 实验二 物理内存管理</h3><ul>
+<li>页目录表的基址是保存在寄存器CR3</li>
+<li>在启动页机制后，不可能再取消段机制，因为页机制是需要段机制先有，然后再返回回去，最后实验页机制。进入保护模式后，段机制一定存在，是为了上下兼容。此时，线性地址和虚地址是对等映射。</li>
+<li>给定一个虚页地址和物理页地址，再建立二级页表并建立正确虚实映射关系的过程中，需要完成的事务主要包括：<ul>
+<li>给页目录表动态分配空间，给页表分配空间</li>
+<li>让页基址寄存器的高20位内容位页目录表的高20位物理地址</li>
+<li>再虚地址高10位的值为index的页目录项中的高20位填写页表的高20位物理地址，设置有效位</li>
+<li>再虚地址中10位的值为index的页表项中的高20位填写物理页地址的高20位物理地址，设置有效位</li>
+</ul>
+</li>
+<li>再保护模式下，x86体系结构中内存地址有三种：逻辑地址（虚地址）、线性地址和物理地址，逻辑地址指的是程序指令中使用的地址，物理地址是实际可以访问的地址。逻辑地址通过段式管理的地址映射方式可以得到线性地址，线性地址通过页式管理的方式（地址映射）可以得到物理地址。再ucore中短时管理只起到了一个过度作用，它将逻辑地址不加转换地直接映射成线性地址。</li>
+<li>ucore中地页式管理将线性地址分成三部分（Directory部分、Table部分和Offset部分）。ucore地页式管理通过一个二级地页表实现。一级页表地起始物理地址存放再cr3寄存器中，这个地址必须是一个页对齐地地址，低12位必须为0.</li>
+</ul>
+<h3 id="第八讲-虚拟存储"><a href="#第八讲-虚拟存储" class="headerlink" title="第八讲 虚拟存储"></a>第八讲 虚拟存储</h3><h4 id="覆盖"><a href="#覆盖" class="headerlink" title="覆盖"></a>覆盖</h4><ul>
+<li>只能发生再没有调用关系的模块间</li>
+<li>给出的时模块间的逻辑覆盖结构</li>
+<li>发生在运行程序的内部模块间</li>
+</ul>
+<h4 id="交换"><a href="#交换" class="headerlink" title="交换"></a>交换</h4><ul>
+<li>以进程为单位</li>
+<li>不需要模块间的逻辑覆盖结构</li>
+<li>发生在内存进程间</li>
+</ul>
+<h4 id="程序在执行过程中的一个较短时期，所执行的指令地址和指令的操作数地址，分别局限于一定区域"><a href="#程序在执行过程中的一个较短时期，所执行的指令地址和指令的操作数地址，分别局限于一定区域" class="headerlink" title="程序在执行过程中的一个较短时期，所执行的指令地址和指令的操作数地址，分别局限于一定区域"></a>程序在执行过程中的一个较短时期，所执行的指令地址和指令的操作数地址，分别局限于一定区域</h4><ul>
+<li>时间局部性<ul>
+<li>一条指令的一次执行和下次执行，一个数据的一次访问和下次访问都几种在一个较短时期内</li>
+</ul>
+</li>
+<li>空间局部性<ul>
+<li>当前指令和邻近的几条指令，当前访问的数据和邻近的几个数据都几种在一个较小区域内</li>
+</ul>
+</li>
+<li>分支局部性<ul>
+<li>一条跳转指令的两次执行，很可能跳到相同的内存位置</li>
+</ul>
+</li>
+</ul>
+<h4 id="虚拟存储的基本概念"><a href="#虚拟存储的基本概念" class="headerlink" title="虚拟存储的基本概念"></a>虚拟存储的基本概念</h4><ul>
+<li>思路：<ul>
+<li>将不常用的部分内存块暂存到外存</li>
+</ul>
+</li>
+<li>原理：<ul>
+<li>只将当前指令执行需要的部分页面或段装入内存</li>
+<li>指令执行中需要的指令或数据不在内存（称为缺页或缺段）时<ul>
+<li>处理器通知操作系统将相应的页面或段调入内存</li>
+</ul>
+</li>
+<li>操作系统将内存中暂时不用的页面或段保存到外存</li>
+</ul>
+</li>
+<li>实现方式<ul>
+<li>虚拟页式存储</li>
+<li>虚拟段式存储</li>
+</ul>
+</li>
+</ul>
+<h4 id="虚拟存储的基本特征"><a href="#虚拟存储的基本特征" class="headerlink" title="虚拟存储的基本特征"></a>虚拟存储的基本特征</h4><ul>
+<li><p>页面锁定（frame locking）</p>
+<ul>
+<li>描述必须常驻内存的逻辑页面</li>
+<li>操作系统的关键部分</li>
+<li>要求响应速度的代码和数据</li>
+<li>页表中的锁定标志位（lock bit）</li>
+</ul>
+</li>
+<li><p>缺页次数的计算刚开始没有相应的内容时也要算时缺页的状态，记得加上统计次数。</p>
+</li>
+<li><p>Bleday现象：</p>
+<ul>
+<li>采用FIFO等算法时，可能出现分配的物理页面数增加，缺页次数反而升高的异常现象</li>
+<li>LRU算法没有Belady现象</li>
+</ul>
+</li>
+</ul>
+<h4 id="全局页面置换算法"><a href="#全局页面置换算法" class="headerlink" title="全局页面置换算法"></a>全局页面置换算法</h4><ul>
+<li>工作集置换算法</li>
+<li>缺页率置换算法</li>
+<li>抖动和负载控制</li>
+</ul>
+<h4 id="常驻集"><a href="#常驻集" class="headerlink" title="常驻集"></a>常驻集</h4><p>在当前时刻，进程实际存留在内存当中的页面集合。</p>
+
+    </div>
+
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>liweichao
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://git-liweichao.github.io/2021/03/09/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" title="操作系统学习记录">http://git-liweichao.github.io/2021/03/09/操作系统学习记录/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/03/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9B%B8%E5%85%B3%E7%9F%A5%E8%AF%86%E7%82%B9%E8%AE%B0%E5%BD%95/" rel="prev" title="计算机网络相关知识点记录">
+      <i class="fa fa-chevron-left"></i> 计算机网络相关知识点记录
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E8%AE%B2-%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E6%A6%82%E8%BF%B0"><span class="nav-number">1.</span> <span class="nav-text">第一讲 操作系统概述</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E7%BB%93%E6%9E%84"><span class="nav-number">1.1.</span> <span class="nav-text">操作系统结构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%87%E4%BB%B6%E5%8F%A5%E6%9F%84%EF%BC%9A"><span class="nav-number">1.1.0.1.</span> <span class="nav-text">文件句柄：</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AE%9E%E6%A8%A1%E5%BC%8F%E5%92%8C%E4%BF%9D%E6%8A%A4%E6%A8%A1%E5%BC%8F"><span class="nav-number">1.2.</span> <span class="nav-text">实模式和保护模式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%86%85%E8%81%94%E6%B1%87%E7%BC%96"><span class="nav-number">1.3.</span> <span class="nav-text">内联汇编</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%AA%8CLab1"><span class="nav-number">2.</span> <span class="nav-text">实验Lab1</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%AE%E9%A2%982-%E4%B8%80%E4%B8%AA%E8%A2%AB%E7%B3%BB%E7%BB%9F%E8%AE%A4%E4%B8%BA%E6%98%AF%E7%AC%A6%E5%90%88%E8%A7%84%E8%8C%83%E7%9A%84%E7%A1%AC%E7%9B%98%E4%B8%BB%E5%BC%95%E5%AF%BC%E6%89%87%E5%8C%BA%E7%9A%84%E7%89%B9%E5%BE%81%E6%98%AF%E4%BB%80%E4%B9%88%EF%BC%9F"><span class="nav-number">2.1.</span> <span class="nav-text">问题2 一个被系统认为是符合规范的硬盘主引导扇区的特征是什么？</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#GDT%E8%A1%A8"><span class="nav-number">2.1.1.</span> <span class="nav-text">GDT表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E5%85%AD%E8%AE%B2-%E7%89%A9%E7%90%86%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86%EF%BC%9A%E9%9D%9E%E8%BF%9E%E7%BB%AD%E5%86%85%E5%AD%98%E5%88%86%E9%85%8D"><span class="nav-number">2.2.</span> <span class="nav-text">第六讲 物理内存管理：非连续内存分配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E4%B8%83%E8%AE%B2-%E5%AE%9E%E9%AA%8C%E4%BA%8C-%E7%89%A9%E7%90%86%E5%86%85%E5%AD%98%E7%AE%A1%E7%90%86"><span class="nav-number">2.3.</span> <span class="nav-text">第七讲 实验二 物理内存管理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AC%AC%E5%85%AB%E8%AE%B2-%E8%99%9A%E6%8B%9F%E5%AD%98%E5%82%A8"><span class="nav-number">2.4.</span> <span class="nav-text">第八讲 虚拟存储</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A6%86%E7%9B%96"><span class="nav-number">2.4.1.</span> <span class="nav-text">覆盖</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%BA%A4%E6%8D%A2"><span class="nav-number">2.4.2.</span> <span class="nav-text">交换</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A8%8B%E5%BA%8F%E5%9C%A8%E6%89%A7%E8%A1%8C%E8%BF%87%E7%A8%8B%E4%B8%AD%E7%9A%84%E4%B8%80%E4%B8%AA%E8%BE%83%E7%9F%AD%E6%97%B6%E6%9C%9F%EF%BC%8C%E6%89%80%E6%89%A7%E8%A1%8C%E7%9A%84%E6%8C%87%E4%BB%A4%E5%9C%B0%E5%9D%80%E5%92%8C%E6%8C%87%E4%BB%A4%E7%9A%84%E6%93%8D%E4%BD%9C%E6%95%B0%E5%9C%B0%E5%9D%80%EF%BC%8C%E5%88%86%E5%88%AB%E5%B1%80%E9%99%90%E4%BA%8E%E4%B8%80%E5%AE%9A%E5%8C%BA%E5%9F%9F"><span class="nav-number">2.4.3.</span> <span class="nav-text">程序在执行过程中的一个较短时期，所执行的指令地址和指令的操作数地址，分别局限于一定区域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E5%AD%98%E5%82%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="nav-number">2.4.4.</span> <span class="nav-text">虚拟存储的基本概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%99%9A%E6%8B%9F%E5%AD%98%E5%82%A8%E7%9A%84%E5%9F%BA%E6%9C%AC%E7%89%B9%E5%BE%81"><span class="nav-number">2.4.5.</span> <span class="nav-text">虚拟存储的基本特征</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%A8%E5%B1%80%E9%A1%B5%E9%9D%A2%E7%BD%AE%E6%8D%A2%E7%AE%97%E6%B3%95"><span class="nav-number">2.4.6.</span> <span class="nav-text">全局页面置换算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%B8%B8%E9%A9%BB%E9%9B%86"><span class="nav-number">2.4.7.</span> <span class="nav-text">常驻集</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="liweichao"
+      src="/images/clannad.jpg">
+  <p class="site-author-name" itemprop="name">liweichao</p>
+  <div class="site-description" itemprop="description">If you are not as smart as others, as others good conditions, please put more time! more energy! more sweat!</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/git-liweichao" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;git-liweichao" rel="noopener" target="_blank"><i class="github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:li_wei_chao@126.com" title="E-Mail → mailto:li_wei_chao@126.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i></a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">©2021 by LiWeiChao</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+    </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/Epsilon2.1.model.json"},"display":{"position":"right","width":170,"height":340},"mobile":{"show":true,"scale":0.5},"react":{"opacity":1},"log":false});</script></body>
+
+<link rel="stylesheet" href="/dist/APlayer.min.css">
+<div id="aplayer"></div>
+<script type="text/javascript" src="/dist/APlayer.min.js"></script>
+<script type="text/javascript" src="/dist/music.js"></script>
+
+</html>

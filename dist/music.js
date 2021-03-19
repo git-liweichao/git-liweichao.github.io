@@ -82,6 +82,18 @@ const ap = new APlayer({
         cover: 'https://p2.music.126.net/aiPQXP8mdLovQSrKsM3hMQ==/1416170985079958.jpg',
       },
       {
+        name: '星月神话',
+        artist: '金莎',
+        url: 'http://music.163.com/song/media/outer/url?id=406730463.mp3',
+        cover: 'http://p1.music.126.net/Ka9mTytJ3bEOLG0Gz-HqkA==/3274345638672304.jpg',
+      },
+      {
+        name: '蝴蝶泉边',
+        artist: '黄雅莉',
+        url: 'http://music.163.com/song/media/outer/url?id=239682.mp3',
+        cover: 'http://p4.music.126.net/yyMuGVix7sQMejkZhFrwPg==/109951163077718442.jpg',
+      },
+      {
         name: '我们的冒险',
         artist: '曹寅',
         url: 'https://storage.live.com/items/1AF2905C36584ECB!3524?authkey=!AODWAxMNvDHqAZ8',
