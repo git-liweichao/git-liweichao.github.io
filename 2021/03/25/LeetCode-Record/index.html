@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 5.3.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/change_32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/change_16x16.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"git-liweichao.github.io","root":"/","scheme":"Gemini","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":true,"show_result":true,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="88. Merge Sorted Array(Easy) 思路简述：因为两个vector是递增的，并且第一vector过增加了第二个vector的长度。最终想要得到最后的两个归并排序，所以设置三个指针，第一个指向vector1的m长的末尾，第二个指向vector2的n长的末尾，第三个pos指向m+n长的末尾。对比vector1和vector2谁大谁往pos后面填充。注意：如果是填充到最后第二个ve">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode-Record">
+<meta property="og:url" content="http://git-liweichao.github.io/2021/03/25/LeetCode-Record/index.html">
+<meta property="og:site_name" content="MyShare">
+<meta property="og:description" content="88. Merge Sorted Array(Easy) 思路简述：因为两个vector是递增的，并且第一vector过增加了第二个vector的长度。最终想要得到最后的两个归并排序，所以设置三个指针，第一个指向vector1的m长的末尾，第二个指向vector2的n长的末尾，第三个pos指向m+n长的末尾。对比vector1和vector2谁大谁往pos后面填充。注意：如果是填充到最后第二个ve">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-03-25T13:45:56.000Z">
+<meta property="article:modified_time" content="2021-04-02T14:27:16.652Z">
+<meta property="article:author" content="liweichao">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://git-liweichao.github.io/2021/03/25/LeetCode-Record/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>LeetCode-Record | MyShare</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">MyShare</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Notes</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-playlist">
+
+    <a href="/playlist/" rel="section"><i class="music fa-fw"></i>playlist</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://git-liweichao.github.io/2021/03/25/LeetCode-Record/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/clannad.jpg">
+      <meta itemprop="name" content="liweichao">
+      <meta itemprop="description" content="If you are not as smart as others, as others good conditions, please put more time! more energy! more sweat!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MyShare">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          LeetCode-Record
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-25 13:45:56" itemprop="dateCreated datePublished" datetime="2021-03-25T13:45:56Z">2021-03-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-02 14:27:16" itemprop="dateModified" datetime="2021-04-02T14:27:16Z">2021-04-02</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="88-Merge-Sorted-Array-Easy"><a href="#88-Merge-Sorted-Array-Easy" class="headerlink" title="88. Merge Sorted Array(Easy)"></a>88. Merge Sorted Array(Easy)</h3><ul>
+<li>思路简述：因为两个vector是递增的，并且第一vector过增加了第二个vector的长度。最终想要得到最后的两个归并排序，所以设置三个指针，第一个指向vector1的m长的末尾，第二个指向vector2的n长的末尾，第三个pos指向m+n长的末尾。对比vector1和vector2谁大谁往pos后面填充。<strong>注意：如果是填充到最后第二个vector不为空，则第二个vector剩下的元素要添加到第一个pos中剩余的位置里面</strong>。</li>
+</ul>
+<h3 id="142-Linked-List-cycle-ii-Medium"><a href="#142-Linked-List-cycle-ii-Medium" class="headerlink" title="142. Linked List cycle ii(Medium)"></a>142. Linked List cycle ii(Medium)</h3><ul>
+<li>思路简述：这里主要使用的思想是Floyd判圈法。关于链表中是否存在环路，通常使用该种方法进行判断。这里采用的是快慢指针的思路。快慢指针都指向开头，慢指针一次走一步，块指针一次走两步。先判断是否存在快慢指针相遇的情况：使用do-while先判断当前fast和fast-&gt;next是否为空，为空直接返回nullptr,否则在循环中走各自的步数。如果出现为相遇的情况，说明存在链表回路，此时将fast移动到head处，同时恢复1个步长，当两者再次相遇时，返回fast对应的节点即可。假设慢节点走了n，则快节点走了2n，所以相遇在n点，所以再走n点就可以到达相遇的结点。</li>
+</ul>
+<h3 id="633-Sum-Of-Sequence-Number"><a href="#633-Sum-Of-Sequence-Number" class="headerlink" title="633. Sum Of Sequence Number"></a>633. Sum Of Sequence Number</h3><ul>
+<li>思路简述：这里的思想就是双指针，一个位于开头，一个位于结尾，两端互相靠拢逼近，注意使用<strong>long的长整型防止溢出</strong></li>
+</ul>
+<h3 id="680-Valid-Palindrome-ii"><a href="#680-Valid-Palindrome-ii" class="headerlink" title="680. Valid Palindrome-ii"></a>680. Valid Palindrome-ii</h3><ul>
+<li>思路简述：<ul>
+<li>第一种方法：这道回文题目很明显需要使用双指针的思路来求解。首先<strong>不管是单数的还是双数长度的序列，只要l &lt; r时满足回文字母相同那么就可以确定是回文序列，这点需要事先推导出来</strong>。因为有一次可以删除修改的机会，所以当两个指针指向的字符不同时，可以利用辅助函数，求解左指针加1与剩下的匹配情况，再求解右指针加1与剩下的匹配情况，两者有一种满足就可以返回对应的True;</li>
+</ul>
+</li>
+</ul>
+<h3 id="524-Longest-Word-in-Dictionary-through-Delecting-Medium"><a href="#524-Longest-Word-in-Dictionary-through-Delecting-Medium" class="headerlink" title="524. Longest Word in Dictionary through Delecting (Medium)"></a>524. Longest Word in Dictionary through Delecting (Medium)</h3><ul>
+<li>思路简述：<ul>
+<li>该题目要求从一个包含字符串的数组中寻找能够和已知输入字符串可以匹配的最长字符串，如果长度相等的话就按返回字典序最小的对应匹配项。匹配条件是输入字符串可以删除元素达到和字符串数组中的元素相同。<ul>
+<li>通过一个辅助的int函数在字符串数组中寻找到可以匹配的字符串的长度。在主函数遍历每个字符串数组中的每个元素，实时更新对应的最大长度和返回的元素项。当最大长度相同时，比较一下两者的字典序（这里指的时ASCII码的大小），更新小的字符串即可。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="69-sqrtx（Easy）"><a href="#69-sqrtx（Easy）" class="headerlink" title="69. sqrtx（Easy）"></a>69. sqrtx（Easy）</h3><ul>
+<li>思路简述：使用二分查找，首先是最左边和最右边的对应变量的定义。使用while左坐标小于右坐标，判断的条件是平方，这里需要定义的是mid为long, 还有中间引入一个ans变量用于保存返回，不然当下次循环到来时就会导致无法返回最开始的值了。</li>
+</ul>
+<h3 id="43-find-first-and-last-position-of-element-in-sorted-array-Medium"><a href="#43-find-first-and-last-position-of-element-in-sorted-array-Medium" class="headerlink" title="43. find first and last position of element in sorted array(Medium)"></a>43. find first and last position of element in sorted array(Medium)</h3><ul>
+<li>思路简述：这里使用的就是经典的二分查找的方式，需要详细掌握二分查找的基本模板方式。这里是先找到等于该元素大小的下界，然后再找到大于该元素大小的下界，然后第二个下界减去1就是该元素最后出现的位置。<ul>
+<li>二分查找的几个关键点需要注意以下：<ul>
+<li>初始化的右边界为r = nums.size()，为对应的长度</li>
+<li>while循环中的l &lt; r，不是等于</li>
+<li>右边界的更新方式为r = mid, 左边界的更新方式为l = mid + 1;不要混淆。</li>
+<li>最后返回的是左边界l</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="二分查找算法总结："><a href="#二分查找算法总结：" class="headerlink" title="二分查找算法总结："></a>二分查找算法总结：</h3><ul>
+<li><p>一共由三个区域，分别是小于target的区域一段，属于第一段；等于target的区域一段，属于第二段;大于target的一段，属于第二段。通常查找对应的四个位置：</p>
+<ul>
+<li><strong>小于target的上界</strong></li>
+<li><strong>等于target的下界</strong></li>
+<li><strong>等于target的上界</strong></li>
+<li><strong>大于target的下界</strong></li>
+</ul>
+<p>通常的做法是通过两个求下界函数可以推导另外两个求上界的位置，分别是两个求下界函数减去1即可。</p>
+</li>
+<li><p>这里列举了两种二分查找的c++的常用的模板，分别是lower_bound()和upper_bound()，这两个求解的分别是<strong>等于target的下界</strong>和<strong>大于target的下界</strong></p>
+<p>首先是lower_bound()求解的是<strong>等于target的下界</strong>：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">lower_bound</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; nums, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>, right = nums.size(), mid;</span><br><span class="line">    <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">        mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (nums[mid] &gt;= target) &#123;</span><br><span class="line">            right = mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> left = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">upper_bound</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; nums. <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>, right = nums.size(), mid;</span><br><span class="line">    <span class="keyword">while</span> (left &lt; right) &#123;</span><br><span class="line">        mid = left + (right - left) / <span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (nums[mid] &gt; target) &#123;</span><br><span class="line">            right = mid;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> </span><br><span class="line">            left = mid + <span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过这两种二分法就可以推导出其他的二分结果。</p>
+</li>
+</ul>
+<h3 id="189-Rotate-Array"><a href="#189-Rotate-Array" class="headerlink" title="189. Rotate Array"></a>189. Rotate Array</h3><ul>
+<li>思路简述：使用三次反转可以比较快速地解决该问题。第一次反转范围：nums.begin()和nums.end()-k%nums.size()之间，第二次反转范围：nums.end()-k%nums.size()之间和nums.end()之间，第三次反转范围：nums.begin()-nums.end()之间。注意这里<strong>使用k%nums.size()是由于旋转可能超过总长度，当到总长度时其实原来的向量是没有变动的，所以需要取余来对k进行处理</strong>。</li>
+</ul>
+<h3 id="540-Single-Element-in-a-sorted-array"><a href="#540-Single-Element-in-a-sorted-array" class="headerlink" title="540. Single Element in a  sorted array"></a>540. Single Element in a  sorted array</h3><ul>
+<li>思路简述：</li>
+</ul>
+<h3 id="常用排序算法总结"><a href="#常用排序算法总结" class="headerlink" title="常用排序算法总结"></a>常用排序算法总结</h3><ul>
+<li><p>快速排序（Quicksort）</p>
+<ul>
+<li><p>快速排序采用了一种分治的策略。</p>
+</li>
+<li><p>基本思想：</p>
+<ol>
+<li>先从数列中取出一个数作为基准数。</li>
+<li>分区过程，将比这个数大的数全放到它的右边，小于或等于它的数全放到它的左边。</li>
+<li>再对左右区间重复第二步，直到各区间只有一个数。</li>
+</ol>
+</li>
+<li><p>对挖坑填数进行总结：</p>
+<ol>
+<li>i=L;j=R;将基准数挖出形成第一个坑a[i]。</li>
+<li>j–由后向前找比它小的数，找到后挖出此数填前一个坑a[i]中。</li>
+<li>i++由前向后找比它大的数，找到后页挖出此数填到前一个坑a[j]中。</li>
+<li>再重复执行2、3两步，知道i==j，将基准数填入a[i]中。</li>
+</ol>
+</li>
+<li><p>快速排序代码示意：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">quick_sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (l + <span class="number">1</span> &gt;= r) &#123;  <span class="comment">//只剩下一个元素的情况就直接退出即可</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> first = l, last = r - <span class="number">1</span>, key = nums[first];</span><br><span class="line">    <span class="keyword">while</span> (first &lt; last) &#123;</span><br><span class="line">        <span class="keyword">while</span> (first &lt; last &amp;&amp; nums[last] &gt;= key) &#123;</span><br><span class="line">            --last;</span><br><span class="line">        &#125;</span><br><span class="line">        nums[first] = nums[last]; </span><br><span class="line">        <span class="keyword">while</span> (first &lt; last &amp;&amp; nums[first] &lt;= key) &#123;</span><br><span class="line">            ++first;</span><br><span class="line">        &#125;</span><br><span class="line">        nums[last] = nums[first];</span><br><span class="line">    &#125;</span><br><span class="line">    nums[first] = key;</span><br><span class="line">    quick_sort(nums, l, first);</span><br><span class="line">    quick_sort(nums, first + <span class="number">1</span>, right + r);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">quick_sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; nums, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (l + <span class="number">1</span> &gt;= r)&#123; <span class="comment">//后面first &lt; last不加等于号的原因在于这里会直接跳出不会再进行判断了，避免多一次的循环</span></span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> first = l, <span class="keyword">int</span> last = r - <span class="number">1</span>, key = nums[first];</span><br><span class="line">    <span class="keyword">while</span>(first &lt; last) &#123;</span><br><span class="line">        <span class="keyword">while</span> (last &gt;= <span class="number">0</span> &amp;&amp; nums[last] &gt;= key) &#123;</span><br><span class="line">            --last;</span><br><span class="line">        &#125;</span><br><span class="line">        nums[first] = nums[last];</span><br><span class="line">        <span class="keyword">while</span> (first &lt;= r &amp;&amp; nums[first] &lt;= key) &#123;</span><br><span class="line">            ++first;</span><br><span class="line">        &#125;</span><br><span class="line">        nums[last] == nums[first];</span><br><span class="line">    &#125;</span><br><span class="line">    nums[first] = key;</span><br><span class="line">    quick_sort(nums, l, first);</span><br><span class="line">    quick_sort(nums, first + <span class="number">1</span>, r);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+<li><p>快速排序算法的变体–快速选择算法：</p>
+<ul>
+<li><p>算法思想：</p>
+<ul>
+<li><p>快速选择算法通常使用在求解k-th Element问题中：可以在O(n)时间复杂度,O(1)的空间复杂度完成。快速选择和快排的思想有点类似，不过我们只要找到第k大的枢（pivot）即可，因为每次快排选择的元素后，左边比它小，右边比它大，然后分治思想，再对每一个部分进行排序。此时选择出来的元素位置是定好的，所以我们只要判断其位置是不是最后的第k大元素所处在的位置即可。主要分成主函数和辅助函数，主函数主要用于判断是不是最后第k大的位置，如果不是进一步缩小所需要的范围。辅助函数主要用于进行快速选择排序。</p>
+</li>
+<li><p>eg.</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findKthLargest</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums, <span class="keyword">int</span> k)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> l = <span class="number">0</span>, r = nums.size() - <span class="number">1</span>, mid;</span><br><span class="line">    <span class="keyword">int</span> target = nums.size() - k;</span><br><span class="line">    <span class="keyword">while</span>(l &lt; r) &#123;  <span class="comment">// 这里l不能等于r是因为后面的quickSelection边界溢出</span></span><br><span class="line">        mid = quickSelection(nums, l, r);</span><br><span class="line">        <span class="keyword">if</span> (mid == target) &#123;</span><br><span class="line">            <span class="keyword">return</span> nums[mid];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span> (mid &lt; target) &#123;</span><br><span class="line">            l = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span> &#123;</span><br><span class="line">            r = mid - <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> nums[l];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">quickSelection</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> i = l + <span class="number">1</span>, j = r;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>) &#123;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; r &amp;&amp; nums[i] &lt;= nums[l]) &#123;</span><br><span class="line">            ++i;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (l &lt; j &amp;&amp; nums[j] &gt;= nums[j]) &#123;</span><br><span class="line">            --j;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (i &gt;= j) &#123;</span><br><span class="line">            <span class="keyword">break</span>; <span class="comment">// 循环退出条件</span></span><br><span class="line">        &#125;</span><br><span class="line">        swap(nums[i], nums[j]);</span><br><span class="line">    &#125;</span><br><span class="line">    swap(nums[l], nums[j]); <span class="comment">// 退出循环后，交换左边的小于该数，右边的大于该数</span></span><br><span class="line">    <span class="keyword">return</span> j; <span class="comment">// 返回该数排序后的位置</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>归并排序（Merge Sort）</p>
+<ul>
+<li><p>算法采用分治法（Divide and Conquer）的一个典型应用，且各层分治递归可以同时进行。速度仅此于快速排序，为稳定排序算法，一般用于对总体无序，但是各子项相对有序的数列。</p>
+</li>
+<li><p>基本思想：</p>
+<ul>
+<li><strong>分解</strong>：将n个元素分成个含n/2个元素的子序列</li>
+<li><strong>解决</strong>：用合并排序法对连个子序列递归的排序</li>
+<li><strong>合并</strong>：合并两个已排序的子序列已得到排序结果</li>
+</ul>
+</li>
+<li><p>归并排序代码示例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">merge_sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums, <span class="keyword">int</span> l , <span class="keyword">int</span> r, <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;temp)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span> (l + <span class="number">1</span> &gt;= r) &#123;</span><br><span class="line">        <span class="keyword">return</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">int</span> m = l + (r - l ) / <span class="number">2</span>;</span><br><span class="line">    merge_sort(nums, l, m, temp);</span><br><span class="line">    mergt_sort(nums, m, r, temp);</span><br><span class="line">    <span class="keyword">int</span> p = <span class="number">1</span>, q &lt; m, i = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">while</span> (p &lt; m || q &lt; r) &#123;</span><br><span class="line">        <span class="keyword">if</span> (q &gt;= r || (p &lt; m &amp;&amp; nums[p] &lt;= nums[q])) &#123;</span><br><span class="line">            temp[i++] = nums[p++];</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            temp[i++] = nums[q++];</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (i = l; i &lt; r; ++i) &#123;</span><br><span class="line">        nums[i] = temp[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>插入排序</p>
+<ul>
+<li><p>基本思想：</p>
+<ul>
+<li>插入排序的工作原理是通过构建有序序列，对于未排序数据，在已排序序列中从后向前扫描，找到相应的位置并插入。在从后向前扫描过程中，需要反复把已排序元素逐步向后移动，为最新元素提供插入空间。有点类似<strong>扑克牌的排序</strong>。</li>
+</ul>
+</li>
+<li><p>代码示意：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">insertion_sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &gt; <span class="number">0</span> &amp;&amp; nums[j] &lt; nums[j - <span class="number">1</span>]; --j) &#123;</span><br><span class="line">               	swap(nums[j], nums[j - <span class="number">1</span>]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+<li><p>选择排序</p>
+<ul>
+<li><p>基本思想：</p>
+<ul>
+<li>首先在未排序序列中找到最小（大）元素，存放到排序序列的其实位置，然后，再从剩余未排序元素中继续寻找最小（大）元素，然后放到已排序序列的末尾。依次类推，知道所有元素排序完毕。</li>
+<li>选择排序的思想其实和冒泡排序类似，都是在一次排序后把最小的元素放到最前面，或者将最大值放到最后面。冒泡排序是通过相邻的比较和交换，选择排序是通过对整体的选择，每一趟排序从前后后查找出无序区的最小值，将最小值交换至无序区最前面的位置。</li>
+</ul>
+</li>
+<li><p>选择排序代码示意：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">selection_sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; nums, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> mid;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n - <span class="number">1</span>; ++i) &#123;  <span class="comment">// 第一个循环从首元素开始到倒数第二个</span></span><br><span class="line">        mid = i;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = i + <span class="number">1</span>; j &lt; n; ++j) &#123;  <span class="comment">// 第二个循环从i的下一个开始到倒数第一个</span></span><br><span class="line">            <span class="keyword">if</span> (nums[j] &lt; nums[mid]) &#123;</span><br><span class="line">                mid = j;   <span class="comment">// 找到更小的，标记最小的序号</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        swap(nums[mid], nums[i]); <span class="comment">//交换对应的内容</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+<li><p>冒泡排序</p>
+<ul>
+<li><p>基本思想：</p>
+<ul>
+<li>重复走访要排序的数列，通过两两比较相邻记录的排序码。排序过程中每次从后往前冒一个最小值，且每次能确定一个数在序列中的最终位置。若发生逆序，则交换；量两种方式及逆行冒泡，一种是先把小的冒泡到前边去，另一种是把大的元素冒泡到后边去。</li>
+</ul>
+</li>
+<li><p>代码示例：</p>
+<p>刚开始没有改进的版本：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bubble_sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums, <span class="keyword">int</span> len)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; len; ++i) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; len - i; ++j) &#123;</span><br><span class="line">            <span class="keyword">if</span> (nums[j - <span class="number">1</span>] &gt; nums[j]) &#123;</span><br><span class="line">                swap(nums[j - <span class="number">1</span>], nums[j]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>改进方案版本：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">bubble_sort</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; &amp;nums, <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    boolean change;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">1</span>; i &lt; n; ++i) &#123;  <span class="comment">// 第一次循环不需要，因为后面j已经会排一次</span></span><br><span class="line">        change = <span class="literal">false</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">1</span>; j &lt; n - i + <span class="number">1</span>; ++j) &#123; <span class="comment">//注意这里是n-i + 1，每循环一次，最后一个元素就排好了，所以下一次就不再需要对最后一个元素进行操作了</span></span><br><span class="line">            <span class="keyword">if</span> (nums[j] &lt; nums[j - <span class="number">1</span>]) &#123;</span><br><span class="line">                swap(nums[j], nums[j - <span class="number">1</span>]);</span><br><span class="line">                change = <span class="literal">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (!<span class="literal">false</span>) &#123;</span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="125-Kth-Largest-Element-in-an-Array"><a href="#125-Kth-Largest-Element-in-an-Array" class="headerlink" title="125. Kth Largest Element in an Array"></a>125. Kth Largest Element in an Array</h3><ul>
+<li>思路简述：<ul>
+<li>通常这种找到第K大的数使用快速搜索的方式。首先需要引入一个辅助函数。辅助函数的思想和快排的有点类似，但是在这里我们不需要对其进行排序，因此，通常使用第一个作为需要搜索的值。当我们对首个元素进行快排操作后，左边的都是比它小的，右边的都是比它的，它的位置是固定的。我们此时要返回的它对应位置的值（通常是从后向前的那个值），比较它的位置是否和最终第K大的位置相同。如果相同的话就是，不同的话根据位置大于最终的值还是小于最终的值决定区间向左还是区间向右（有点类似二分）。注意对应的循环的边界条件，防止溢出。</li>
+</ul>
+</li>
+</ul>
+<h3 id="347-Top-K-Frequent-Elements-Medium"><a href="#347-Top-K-Frequent-Elements-Medium" class="headerlink" title="347. Top K Frequent Elements(Medium)"></a>347. Top K Frequent Elements(Medium)</h3><ul>
+<li>思路简述：这道题目利用两次的桶排序进行操作。并且利用unordered_map的stl数据结构。第一次是对原输入的数组中的每个数字和其出现的频率进行统计，建立对应的映射关系，并且记录最大频率的次数。第二次是通过最大频率次数构造的一个二维vector进行将最大频率依次往下的那些元素包含过去，每个最大频率的下标中包含有对应的元素有哪些。最后的ans，找到前k个最大频率的对应的元素push_back进去，并且当达到k个的长度时直接跳出循环即可。</li>
+</ul>
+<h3 id="451-Sort-Characters-By-Frequency-Medium"><a href="#451-Sort-Characters-By-Frequency-Medium" class="headerlink" title="451. Sort Characters By Frequency(Medium)"></a>451. Sort Characters By Frequency(Medium)</h3><ul>
+<li> 思路简述：这道题目同时是使用了两次的桶排序进行操作。而且也利用了unordered_map，不同的是这里和上一题相比，有char类型的一个区分。第一步统计各个字符出现的频率及对应的频率存储在map里面，通常还需要一个变量用于存储对长或者最高的一个东西，方便第二步初始化vector的大小。第二步建立一个二维的vector第二维的vector用于存储对应的char类型，将对应的字符分配到对应的所属的频率当中去。第三步，使用了三个循环。第一个循环从后往前用于获取对应的频率，第二个循环用于获取对应频率下的字符有哪些，第三个循环用于将对应频率下的字符输出对应频率的次数。</li>
+</ul>
+<h3 id="桶排序："><a href="#桶排序：" class="headerlink" title="桶排序："></a>桶排序：</h3><ul>
+<li>桶排序通常建立unordered map用于第一个桶，再建立对应元素类型的vector用于第二个桶(这个桶通常是两个vector的复合类型)，最终对第二个桶进行操作就可以得到最后的结果。</li>
+</ul>
+<h3 id="75-Sort-Colors"><a href="#75-Sort-Colors" class="headerlink" title="75. Sort Colors"></a>75. Sort Colors</h3><ul>
+<li>思路简述：可以直接使用c++的内置库函数sort和stable_sort函数可以直接得到最后的结果。</li>
+<li>O(n)进行原地排序的思路简述如下：使用一个指针指向最左边，一个指针指向最右边，一个指针作为当前指针。因为只有三种的可能性为0、1、2，所以当前指向的是0就将其和对应的左指针交换，并且左指针加1。如果当前指向的是2就把对应的元素换到右指针，右指针减1。如果都不是就直接curr往前加1。注意退出循环的条件是当前指针小于右指针，因为右指针指向的还是要判断的，每一次往左移动后的那一个还没有进行判断。</li>
+</ul>
+<h3 id="695-Max-Area-Of-Island"><a href="#695-Max-Area-Of-Island" class="headerlink" title="695. Max Area Of Island"></a>695. Max Area Of Island</h3><ul>
+<li>思路简述：在该问题中1表示陆地，0表示海域。这里采用DFS（Depth first search）的思想。通常采用DFS的算法题目都要使用两个函数，第一个函数用于对应的起始条件和返回最终的结果。第二个辅助函数主要用于递归过程的执行。在递归的执行过程中，只要有两种思路。第一种思路是先判断相应的条件是否满足，满足之后才会进行相应的递归入栈调用。<strong>具体体现在这里的是我们先判断在四个方向上是否在指定的容器的范围中并且对应的位置是岛屿</strong>，我们才把当前的区域加上去。第二种思路是设置好对应的区域初始值，直接往四个方向进行递归，然后在递归中判断是否满足相应的边界条件，满足的话再进行，不满足条件就直接返回0。在这道题目中有几个重要的注意点：<ul>
+<li>在递归过程中记得将相应的岛屿的位置变成0，同时记得设置一个区域变量让其值加上1说明我们统计了该地方。这样子做的目的是主函数中同时要遍历每一个点，在一个区域中统计过的点我们不需要再次判断统计，加快了主函数运行速度。</li>
+<li>辅助函数记得设置对应的初始面积叠加上去</li>
+<li>记得往四个方向上进行搜索，可以是使用一个vector中存储五个值，使用四次循环进行四个方向的走动。也可以是直接在当前的坐标上同时进行上下左右四个方向上的移动的递归。不管怎么杨，都要判断对应坐标是否满足边界的范围。</li>
+</ul>
+</li>
+</ul>
+<h3 id="547-Number-Of-Provinces"><a href="#547-Number-Of-Provinces" class="headerlink" title="547. Number Of Provinces"></a>547. Number Of Provinces</h3><ul>
+<li>思路简述：这道题也是典型的DFS的题目。分成主函数和辅助函数的实现<ul>
+<li>这道题目有几个特点，就是输入的一定是一个行列相等的二维的vector，这是由题目可以推断出来的。</li>
+<li>主函数，通常在开头对特殊的边界情况进行判断。定义一个count用于计算不同的省份用于最后的返回。这里引入了一个vector<bool>的容器判断该点是否被访问过了，初始化全为false。和上一题不同的是，这里不需要判断每个值是否满足，因为这里的1表示的只是对应的两个元素是否有相连。所以在主函数中的循环只要对应的连接分布图的行数就行。并且判断条件是该点还没有被访问过，进行深度优先搜索。对应的省份数量也要加1</li>
+<li>辅助函数同样，递归需要一个最后的判断条件。这里使用的是visited容器的引用。对应的标志位进行相应的修改。对一行中的是相连的每一个元素再进行dfs的递归。这里的意思是如果和这个元素相连，再次寻找与该元素相连的元素，并且同样的搜索也是相同的函数。直到找不到对应的相连的元素了 。这样子就把行中的相连元素组成一队，然后主函数没有搜索过的元素会再次重复这个过程。并且在下一次搜索过程中，上一次辅助函数已经把搜索过的元素的标志位修改。所以，下一次的递归搜索就是和之前完全没有相连的新元素，也就意味着新的省份了。</li>
+</ul>
+</li>
+</ul>
+<h3 id="417-Pacific-Atlantic-Water-Flow"><a href="#417-Pacific-Atlantic-Water-Flow" class="headerlink" title="417. Pacific Atlantic Water Flow"></a>417. Pacific Atlantic Water Flow</h3><ul>
+<li>思路简述：在这道题目中，直接由给定的二维vector中寻找对应的满足题目条件的位置较为困难，因此，在这里采用了反向的思维。从两条河流的四条边出发，寻找满足条件的解。同样DFS的一个主函数用于初始条件的开始寻找，一个辅助函数用于对应的DFS的过程。<ul>
+<li>主函数使用题目指定要求的返回类型，这里再构造两个包含对输入中的坐标判断的太平洋和大西洋的两个二维的vector方便我们进行DFS，如果把两个合并在一起不太好操作，因为对应的太平洋和大西洋的轴一条是横的，一条是竖的。从横坐标和纵坐标的两个维度对两个vector进行迭代。最后输出在两个vector中同为true的坐标。</li>
+<li>辅助函数dfs同样，用于递归过程中，首先要有相应的判断条件用于最后的递归返回。再者对还没有寻找过的进行判断，从四个方向上进行相应的迭代。在符合坐标条件和相应的大小比较的情况下进行下一个方向上的DFS。</li>
+<li>因为需要使用当前递归中的左右坐标的进行相应的值判断，所以在这里使用一个循环向四个方向上进行判断，在满足条件的情况下才执行相应的下一步递归。这样子比较方便。比起之前的递归的另一种写法，不管三七二十一直接执行，就没有办法判断相应的条件了。</li>
+</ul>
+</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <div>
+      
+        <div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读-------------</div>
+    
+</div>
+      
+    </div>
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>liweichao
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://git-liweichao.github.io/2021/03/25/LeetCode-Record/" title="LeetCode-Record">http://git-liweichao.github.io/2021/03/25/LeetCode-Record/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/03/09/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/" rel="prev" title="操作系统学习记录">
+      <i class="fa fa-chevron-left"></i> 操作系统学习记录
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#88-Merge-Sorted-Array-Easy"><span class="nav-number">1.</span> <span class="nav-text">88. Merge Sorted Array(Easy)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#142-Linked-List-cycle-ii-Medium"><span class="nav-number">2.</span> <span class="nav-text">142. Linked List cycle ii(Medium)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#633-Sum-Of-Sequence-Number"><span class="nav-number">3.</span> <span class="nav-text">633. Sum Of Sequence Number</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#680-Valid-Palindrome-ii"><span class="nav-number">4.</span> <span class="nav-text">680. Valid Palindrome-ii</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#524-Longest-Word-in-Dictionary-through-Delecting-Medium"><span class="nav-number">5.</span> <span class="nav-text">524. Longest Word in Dictionary through Delecting (Medium)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#69-sqrtx%EF%BC%88Easy%EF%BC%89"><span class="nav-number">6.</span> <span class="nav-text">69. sqrtx（Easy）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#43-find-first-and-last-position-of-element-in-sorted-array-Medium"><span class="nav-number">7.</span> <span class="nav-text">43. find first and last position of element in sorted array(Medium)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E5%88%86%E6%9F%A5%E6%89%BE%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93%EF%BC%9A"><span class="nav-number">8.</span> <span class="nav-text">二分查找算法总结：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#189-Rotate-Array"><span class="nav-number">9.</span> <span class="nav-text">189. Rotate Array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#540-Single-Element-in-a-sorted-array"><span class="nav-number">10.</span> <span class="nav-text">540. Single Element in a  sorted array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%B8%B8%E7%94%A8%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93"><span class="nav-number">11.</span> <span class="nav-text">常用排序算法总结</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#125-Kth-Largest-Element-in-an-Array"><span class="nav-number">12.</span> <span class="nav-text">125. Kth Largest Element in an Array</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#347-Top-K-Frequent-Elements-Medium"><span class="nav-number">13.</span> <span class="nav-text">347. Top K Frequent Elements(Medium)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#451-Sort-Characters-By-Frequency-Medium"><span class="nav-number">14.</span> <span class="nav-text">451. Sort Characters By Frequency(Medium)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%A1%B6%E6%8E%92%E5%BA%8F%EF%BC%9A"><span class="nav-number">15.</span> <span class="nav-text">桶排序：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#75-Sort-Colors"><span class="nav-number">16.</span> <span class="nav-text">75. Sort Colors</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#695-Max-Area-Of-Island"><span class="nav-number">17.</span> <span class="nav-text">695. Max Area Of Island</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#547-Number-Of-Provinces"><span class="nav-number">18.</span> <span class="nav-text">547. Number Of Provinces</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#417-Pacific-Atlantic-Water-Flow"><span class="nav-number">19.</span> <span class="nav-text">417. Pacific Atlantic Water Flow</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="liweichao"
+      src="/images/clannad.jpg">
+  <p class="site-author-name" itemprop="name">liweichao</p>
+  <div class="site-description" itemprop="description">If you are not as smart as others, as others good conditions, please put more time! more energy! more sweat!</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/git-liweichao" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;git-liweichao" rel="noopener" target="_blank"><i class="github fa-fw"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:li_wei_chao@126.com" title="E-Mail → mailto:li_wei_chao@126.com" rel="noopener" target="_blank"><i class="envelope fa-fw"></i></a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" class="cc-opacity" rel="noopener" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2021</span>
+  <span class="with-love">
+    <i class="user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">©2021 by LiWeiChao</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/pjax/pjax.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '.languages',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[data-pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.dataset.pjax !== undefined) {
+      script.dataset.pjax = '';
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.subMenu)
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+  
+
+  
+
+    </div>
+<script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"pluginRootPath":"live2dw/","pluginJsPath":"lib/","pluginModelPath":"assets/","tagMode":false,"debug":false,"model":{"jsonPath":"/live2dw/assets/assets/Epsilon2.1.model.json"},"display":{"position":"right","width":170,"height":340},"mobile":{"show":true,"scale":0.5},"react":{"opacity":1},"log":false});</script></body>
+
+<link rel="stylesheet" href="/dist/APlayer.min.css">
+<div id="aplayer"></div>
+<script type="text/javascript" src="/dist/APlayer.min.js"></script>
+<script type="text/javascript" src="/dist/music.js"></script>
+
+</html>

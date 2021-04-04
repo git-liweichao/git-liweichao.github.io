@@ -168,6 +168,97 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://git-liweichao.github.io/2021/03/25/LeetCode-Record/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/clannad.jpg">
+      <meta itemprop="name" content="liweichao">
+      <meta itemprop="description" content="If you are not as smart as others, as others good conditions, please put more time! more energy! more sweat!">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="MyShare">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2021/03/25/LeetCode-Record/" class="post-title-link" itemprop="url">LeetCode-Record</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-03-25 13:45:56" itemprop="dateCreated datePublished" datetime="2021-03-25T13:45:56Z">2021-03-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2021-04-02 14:27:16" itemprop="dateModified" datetime="2021-04-02T14:27:16Z">2021-04-02</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="88-Merge-Sorted-Array-Easy"><a href="#88-Merge-Sorted-Array-Easy" class="headerlink" title="88. Merge Sorted Array(Easy)"></a>88. Merge Sorted Array(Easy)</h3><ul>
+<li>思路简述：因为两个vector是递增的，并且第一vector过增加了第二个vector的长度。最终想要得到最后的两个归并排序，所以设置三个指针，第一个指向vector1的m长的末尾，第二个指向vector2的n长的末尾，第三个pos指向m+n长的末尾。对比vector1和vector2谁大谁往pos后面填充。<strong>注意：如果是填充到最后第二个vector不为空，则第二个vector剩下的元素要添加到第一个pos中剩余的位置里面</strong>。</li>
+</ul>
+<h3 id="142-Linked-List-cycle-ii-Medium"><a href="#142-Linked-List-cycle-ii-Medium" class="headerlink" title="142. Linked List cycle ii(Medium)"></a>142. Linked List cycle ii(Medium)</h3><ul>
+<li>思路简述：这里主要使用的思想是Floyd判圈法。关于链表中是否存在环路，通常使用该种方法进行判断。这里采用的是快慢指针的思路。快慢指针都指向开头，慢指针一次走一步，块指针一次走两步。先判断是否存在快慢指针相遇的情况：使用do-while先判断当前fast和fast-&gt;next是否为空，为空直接返回nullptr,否则在循环中走各自的步数。如果出现为相遇的情况，说明存在链表回路，此时将fast移动到head处，同时恢复1个步长，当两者再次相遇时，返回fast对应的节点即可。假设慢节点走了n，则快节点走了2n，所以相遇在n点，所以再走n点就可以到达相遇的结点。</li>
+</ul>
+<h3 id="633-Sum-Of-Sequence-Number"><a href="#633-Sum-Of-Sequence-Number" class="headerlink" title="633. Sum Of Sequence Number"></a>633. Sum Of Sequence Number</h3><ul>
+<li>思路简述：这里的思想就是双指针，一个位于开头，一个位于结尾，两端互相靠拢逼近，注意使用<strong>long的长整型防止溢出</strong></li>
+</ul>
+<h3 id="680-Valid-Palindrome-ii"><a href="#680-Valid-Palindrome-ii" class="headerlink" title="680. Valid Palindrome-ii"></a>680. Valid Palindrome-ii</h3><ul>
+<li>思路简述：<ul>
+<li>第一种方法：这道回文题目很明显需要使用双指针的思路来求解。首先<strong>不管是单数的还是双数长度的序列，只要l &lt; r时满足回文字母相同那么就可以确定是回文序列，这点需要事先推导出来</strong>。因为有一次可以删除修改的机会，所以当两个指针指向的字符不同时，可以利用辅助函数，求解左指针加1与剩下的匹配情况，再求解右指针加1与剩下的匹配情况，两者有一种满足就可以返回对应的True;</li>
+</ul>
+</li>
+</ul>
+<h3 id="524-Longest-Word-in-Dictionary-through-Delecting-Medium"><a href="#524-Longest-Word-in-Dictionary-through-Delecting-Medium" class="headerlink" title="524. Longest Word in Dictionary through Delecting (Medium)"></a>524. Longest Word in Dictionary through Delecting (Medium)</h3>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2021/03/25/LeetCode-Record/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
+
+    
+    
+    
+
+    <div>
+      
+    </div>
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://git-liweichao.github.io/2021/03/09/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -199,7 +290,7 @@
                   <i class="far fa-calendar-check"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2021-03-16 01:52:08" itemprop="dateModified" datetime="2021-03-16T01:52:08Z">2021-03-16</time>
+                <time title="修改时间：2021-04-02 11:17:34" itemprop="dateModified" datetime="2021-04-02T11:17:34Z">2021-04-02</time>
               </span>
 
           
@@ -213,12 +304,59 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <h2 id="第一讲-操作系统概述"><a href="#第一讲-操作系统概述" class="headerlink" title="第一讲 操作系统概述"></a>第一讲 操作系统概述</h2><p>操作系统对硬件进行一层隔离。</p>
+          <h2 id="第一讲-操作系统概述"><a href="#第一讲-操作系统概述" class="headerlink" title="第一讲 操作系统概述"></a>第一讲 操作系统概述</h2><h4 id="操作系统定义"><a href="#操作系统定义" class="headerlink" title="操作系统定义"></a>操作系统定义</h4><ul>
+<li><p>操作系统是一个控制程序</p>
+<ul>
+<li>一个<strong>系统软件</strong></li>
+<li>控制程序执行过程，防止错误和计算机的不当使用</li>
+<li>执行用户程序，给用户程序提供各种服务</li>
+<li>方便用户使用计算机系统</li>
+</ul>
+</li>
+<li><p>操作系统对硬件进行一层隔离，对上面的应用提供我们通常所见到的逻辑这些资源，比如说进程、文件、地址空间</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">graph TD;</span><br><span class="line">	软件--&gt;应用软件;</span><br><span class="line">	软件--&gt;系统软件;</span><br><span class="line">	系统软件--&gt;系统应用;</span><br><span class="line">	系统软件--&gt;操作系统;</span><br><span class="line">	操作系统--&gt;命令行;</span><br><span class="line">	操作系统--&gt;内核;</span><br></pre></td></tr></table></figure>
+
+
 <p>操作系统内核特征：并发、共享、虚拟、异步；</p>
-<h3 id="操作系统结构"><a href="#操作系统结构" class="headerlink" title="操作系统结构"></a>操作系统结构</h3><p>加电之后去读BIOS，BIOS去读对应的加载程序，加载程序去读对应的内核映像。</p>
-<p>系统调用: INT和IRET指令用于系统调用：系统调用时，堆栈切换和特权级的转换。</p>
-<p>函数调用：CALL和RET用于常规调用：常规调用时，没有堆栈切换</p>
-<h5 id="文件句柄："><a href="#文件句柄：" class="headerlink" title="文件句柄："></a>文件句柄：</h5><p>1.只有windows中才有句柄，windows中的句柄是指针的指针，因为windows中对象的经常会在内存中移动（如进行垃圾回收后），所以地址值经常会变，所以就对外提供一个指针的指针即句柄给用户，句柄的地址是不会变的。</p>
+<ul>
+<li>并发：<ul>
+<li>计算机系统中同时存在多个运行的程序，需要OS管理和调度</li>
+</ul>
+</li>
+<li>共享：<ul>
+<li>我们多个应用并发进行的时候，宏观上要体现出它们在同时访问资源的情况，微观上要体现它们的互斥访问。</li>
+</ul>
+</li>
+<li>虚拟：<ul>
+<li>利用多道程序设计技术，让每个用户都觉得有一个计算机专门为他服务，交替的频率非常高，让用户在用的时候感觉不太出来这台机器还有其他用户还在使用。</li>
+</ul>
+</li>
+<li>异步：<ul>
+<li>程序的执行不是一贯到底，而是走走停停的，向前推进的速度不可预知。只要运行环境相同，OS需要保证程序运行的结果也要相同。</li>
+</ul>
+</li>
+</ul>
+<h3 id="第三讲-启动、中断和系统调用"><a href="#第三讲-启动、中断和系统调用" class="headerlink" title="第三讲 启动、中断和系统调用"></a>第三讲 启动、中断和系统调用</h3><h4 id="3-1-BIOS-Basic-Input-Output-System"><a href="#3-1-BIOS-Basic-Input-Output-System" class="headerlink" title="3.1 BIOS(Basic Input  Output System)"></a>3.1 BIOS(Basic Input  Output System)</h4><ul>
+<li>BIOS位于空闲空间的再往上的一部分，处于640KB~1MB的位置。</li>
+<li>BIOS提供的基本服务：<ul>
+<li>基本输入输出的程序</li>
+<li>系统设置信息</li>
+<li>开机后自检程序</li>
+<li>系统自启动程序等</li>
+</ul>
+</li>
+<li>BIOS将加载程序从磁盘的引导扇区（512字节）加载到0x7c00，然后跳转到CS:IP = 0000:7c00。<ul>
+<li>这里加载程序的作用是<strong>将操作系统的代码和数据从硬盘加载到内存中，跳转到操作系统的起始位置，控制权交给操作系统</strong></li>
+</ul>
+</li>
+<li>为什么不直接从BIOS里头把操作系统的内核加载进来？<ul>
+<li>磁盘上有各种各样的文件系统，机器出厂时候不可以直接限制死只使用某一种文件系统。而且为了<strong>增加灵活性</strong>，在BIOS里头不可能加上认识所有文件系统代码。因此有一个基本的约定，我不需要认识格式也能从硬盘里头读取到第一块，再用加载程序来识别硬盘上的文件系统。</li>
+</ul>
+</li>
+<li>BIOS以中断调用的方式提供了基本的I/O功能，在x86系统限制在实模式下工作</li>
+</ul>
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2021/03/09/%E6%93%8D%E4%BD%9C%E7%B3%BB%E7%BB%9F%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95/#more" rel="contents">
@@ -868,7 +1006,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">8</span>
+          <span class="site-state-item-count">9</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>

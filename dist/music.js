@@ -46,6 +46,18 @@ const ap = new APlayer({
         cover: 'http://cdnmusic.migu.cn/picture/2020/0103/1023/AScafa0f37681f477299507737accd1b86.jpg',
       },
       {
+        name: '笔记',
+        artist: '周笔畅',
+        url: 'http://music.163.com/song/media/outer/url?id=350909.mp3',
+        cover: 'http://p3.music.126.net/9WvlVAqDesQshpIuZ_Knew==/112150186046307.jpg',
+      },
+      {
+        name: '最后的8/31（万人合唱版）',
+        artist: '八三夭',
+        url: 'http://music.163.com/song/media/outer/url?id=1354221306.mp3',
+        cover: 'http://p3.music.126.net/koIpRfrRBKw82I-Wr-s48w==/109951163950573716.jpg',
+      },
+      {
         name: '情歌',
         artist: '梁静茹',
         url: 'https://storage.live.com/items/1AF2905C36584ECB!3529?authkey=!AEi9rawgCotSSdY',
@@ -104,6 +116,12 @@ const ap = new APlayer({
         artist: '钟菌波',
         url: 'http://music.163.com/song/media/outer/url?id=31645206.mp3',
         cover: 'https://p1.music.126.net/22AFRy2wqgaBDeqmJ-rFiQ==/109951163926961482.jpg',
+      },
+      {
+        name: '依兰爱情故事',
+        artist: '方磊',
+        url: 'http://music.163.com/song/media/outer/url?id=35618549.mp3',
+        cover: 'http://p1.music.126.net/AiRGO6o7-i6p52QJRmF5_Q==/3345813884662970.jpg',
       },
       {
         name: 'Butter-Fly',
