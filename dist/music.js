@@ -100,6 +100,18 @@ const ap = new APlayer({
         cover: 'http://p1.music.126.net/Ka9mTytJ3bEOLG0Gz-HqkA==/3274345638672304.jpg',
       },
       {
+        name: '太多',
+        artist: '陈冠蒲',
+        url: 'http://music.163.com/song/media/outer/url?id=69827.mp3',
+        cover: 'http://p3.music.126.net/iPexHWjKcKCjMoTYHZFMaA==/109951165293600860.jpg',
+      },
+      {
+        name: '需要人陪',
+        artist: '王力宏',
+        url: 'http://music.163.com/song/media/outer/url?id=33497051.mp3',
+        cover: 'http://p4.music.126.net/Y8_pmsNld7rFuN9HTv-wOQ==/3344714371752550.jpg',
+      },
+      {
         name: '蝴蝶泉边',
         artist: '黄雅莉',
         url: 'http://music.163.com/song/media/outer/url?id=239682.mp3',
