@@ -76,6 +76,12 @@ const ap = new APlayer({
         cover: 'http://p3.music.126.net/Md3RLH0fe2a_3dMDnfqoQg==/18590542604286213.jpg',
       },
       {
+        name: '星座书上说',
+        artist: '许嵩',
+        url: 'http://music.163.com/song/media/outer/url?id=167894.mp3',
+        cover: 'http://p3.music.126.net/Md3RLH0fe2a_3dMDnfqoQg==/18590542604286213.jpg',
+      },
+      {
         name: '世界末日(live)',
         artist: '周杰伦',
         url: 'https://storage.live.com/items/1AF2905C36584ECB!3538?authkey=!ACK3Sqf2vXezl7E',
